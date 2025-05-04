@@ -1,35 +1,76 @@
 import React from 'react';
+import { useSelector } from "react-redux";
 
 const ProductItem = ({ product }) => {
-  console.log(product);
+  const isLightTheme = useSelector(
+    (store) => store.productsListSlice.isLightTheme
+  );
 
   const [isExpanded, setIsExpanded] = React.useState(false);
 
   return (
-    <div className="w-sm h-sm border-2 border-[#005f73] rounded-lg overflow-hidden shadow-lg bg-[#dff1ee] text-[#e9d8a6]">
+    <div
+      className={`hover:scale-102 w-sm h-sm border-2 rounded-lg overflow-hidden shadow-lg ${
+        isLightTheme
+          ? "bg-white text-gray-800 border-gray-300"
+          : "bg-gray-800 text-gray-200 border-gray-600"
+      }`}>
       <img
         src={product.images[0]}
         alt="product"
         className="w-full h-sm object-cover"
       />
       <div className="p-4">
-        <h2 className="text-lg font-bold text-[#033d2a]">
-          {product.title}{' '}
-          <span className="text-sm text-[#ee9b00] block">Rating: {product.rating}</span>
+        <h2
+          className={`text-lg font-bold ${
+            isLightTheme ? "text-gray-900" : "text-gray-100"
+          }`}>
+          {product.title}
+          <span
+            className={`text-sm block ${
+              isLightTheme ? "text-yellow-600" : "text-yellow-400"
+            }`}>
+            Rating: {product.rating}
+          </span>
         </h2>
+
         <p className="text-sm mt-2">
-          <span className="block text-[#ca6702]">{product.availabilityStatus}</span>
-          <span className="block text-[#bb3e03]">{product.shippingInformation}</span>
-          <span className="block text-[#ae2012]">{product.returnPolicy}</span>
+          <span
+            className={`block ${
+              isLightTheme ? "text-orange-600" : "text-orange-400"
+            }`}>
+            {product.availabilityStatus}
+          </span>
+          <span
+            className={`block ${
+              isLightTheme ? "text-red-600" : "text-red-400"
+            }`}>
+            {product.shippingInformation}
+          </span>
+          <span
+            className={`block ${
+              isLightTheme ? "text-red-800" : "text-red-500"
+            }`}>
+            {product.returnPolicy}
+          </span>
+          <button className="border-2 bg-[#29b2c4] rounded-md ">
+            Add to Cart
+          </button>
         </p>
-        <p className="text-sm mt-2 text-[#9b2226]">
-          {isExpanded ? product.description : `${product.description.slice(0, 100)}...`}
+        <p
+          className={`text-sm mt-2 ${
+            isLightTheme ? "text-red-700" : "text-red-300"
+          }`}>
+          {isExpanded
+            ? product.description
+            : `${product.description.slice(0, 100)}...`}
           {product.description.length > 100 && (
             <button
               onClick={() => setIsExpanded(!isExpanded)}
-              className="text-[#005f73] ml-2 underline"
-            >
-              {isExpanded ? 'View Less' : 'View More'}
+              className={`ml-2 underline ${
+                isLightTheme ? "text-blue-700" : "text-blue-400"
+              }`}>
+              {isExpanded ? "View Less" : "View More"}
             </button>
           )}
         </p>

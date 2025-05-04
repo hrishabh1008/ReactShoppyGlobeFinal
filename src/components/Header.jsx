@@ -1,21 +1,29 @@
-import React, { useState } from 'react';
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setThemeMode } from "../reduc/productsListSlice";
 
 const Header = () => {
-  const [darkMode, setDarkMode] = useState(false);
+  const isLightTheme = useSelector(
+    (store) => store.productsListSlice.isLightTheme
+  );
+  console.log(isLightTheme);
+
+  const dispatchTheme = useDispatch();
+
+  // const [darkMode, setDarkMode] = useState(false);
 
   const toggleTheme = () => {
-    setDarkMode(!darkMode);
-    document.documentElement.classList.toggle('dark');
+    dispatchTheme(setThemeMode(!isLightTheme));
   };
 
   return (
     <header
       className={`flex items-center justify-between px-6 py-4 ${
-        darkMode ? "bg-[#001219]" : "bg-[#94d2bd]"
+        isLightTheme ? "bg-[#94d2bd]" : "bg-[#001219]"
       }`}>
       <div className="flex items-center space-x-3">
         <img
-          src="https://img.icons8.com/?size=100&id=llnqvTERRls7&format=png&color=000000" // Replace with your logo path
+          src="https://img.icons8.com/?size=100&id=llnqvTERRls7&format=png&color=000000"
           alt="ShoppyGlobe Logo"
           className="h-8 w-8"
         />
@@ -24,7 +32,7 @@ const Header = () => {
       <button
         onClick={toggleTheme}
         className="px-4 py-2 rounded-md text-white bg-[#005f73] hover:bg-[#0a9396] transition">
-        {darkMode ? "Light Mode" : "Dark Mode"}
+        {isLightTheme ? "Light Mode" : "Dark Mode"}
       </button>
     </header>
   );
