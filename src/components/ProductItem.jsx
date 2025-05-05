@@ -1,16 +1,25 @@
 import React from 'react';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addItemToCart } from "../reduc/cartSlice";
 
 const ProductItem = ({ product }) => {
   const isLightTheme = useSelector(
     (store) => store.productsListSlice.isLightTheme
   );
 
+  const cartItem = useSelector((store) => store.cartSlice.items);
+  console.log(cartItem);
+  const dispatch = useDispatch();
+
+  function handleAddToCartBtn() {
+    dispatch(addItemToCart(product));
+  }
+
   const [isExpanded, setIsExpanded] = React.useState(false);
 
   return (
     <div
-      className={`hover:scale-102 w-sm h-sm border-2 rounded-lg overflow-hidden shadow-lg ${
+      className={`hover:shadow-lg hover:scale-101 w-xs h-sm border-2 rounded-lg overflow-hidden shadow-md ${
         isLightTheme
           ? "bg-white text-gray-800 border-gray-300"
           : "bg-gray-800 text-gray-200 border-gray-600"
@@ -53,7 +62,9 @@ const ProductItem = ({ product }) => {
             }`}>
             {product.returnPolicy}
           </span>
-          <button className="border-2 bg-[#29b2c4] rounded-md ">
+          <button
+            className="border-2 bg-[#29b2c4] rounded-md w-full "
+            onClick={handleAddToCartBtn}>
             Add to Cart
           </button>
         </p>
