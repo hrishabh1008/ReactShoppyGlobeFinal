@@ -8,8 +8,6 @@ const ProductList = () => {
     (store) => store.productsListSlice.isLightTheme
   );
 
-  
-
   const { data, loading, error } = useFetch("https://dummyjson.com/products");
   // console.log(data, loading, error);
 

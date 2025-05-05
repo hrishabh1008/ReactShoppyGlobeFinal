@@ -1,14 +1,15 @@
 import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { addItemToCart } from "../reduc/cartSlice";
+import { addItemToCart } from "../redux/cartSlice";
+import { Link } from "react-router-dom";
 
 const ProductItem = ({ product }) => {
   const isLightTheme = useSelector(
     (store) => store.productsListSlice.isLightTheme
   );
 
-  const cartItem = useSelector((store) => store.cartSlice.items);
-  console.log(cartItem);
+  // const cartItem = useSelector((store) => store.cartSlice.items);
+  // console.log(cartItem);
   const dispatch = useDispatch();
 
   function handleAddToCartBtn() {
@@ -63,10 +64,15 @@ const ProductItem = ({ product }) => {
             {product.returnPolicy}
           </span>
           <button
-            className="border-2 bg-[#29b2c4] rounded-md w-full "
+            className="border-2 bg-[#29b2c4] rounded-md w-full my-2 "
             onClick={handleAddToCartBtn}>
             Add to Cart
           </button>
+          <Link to={`/productlist/${product.id}`}>
+            <span className="border-2 block bg-[#29b2c4] rounded-md w-full text-center my-2">
+              View Details
+            </span>
+          </Link>
         </p>
         <p
           className={`text-sm mt-2 ${

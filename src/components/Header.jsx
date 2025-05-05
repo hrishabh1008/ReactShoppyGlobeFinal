@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setThemeMode } from "../reduc/productsListSlice";
+import { setThemeMode } from "../redux/productsListSlice";
 import { Link } from "react-router-dom";
 
 const Header = () => {
@@ -10,7 +10,7 @@ const Header = () => {
   // console.log(isLightTheme);
 
   const cartItem = useSelector((store) => store.cartSlice.items);
-  console.log(cartItem);
+  // console.log(cartItem);
   const dispatchTheme = useDispatch();
 
   // const [darkMode, setDarkMode] = useState(false);

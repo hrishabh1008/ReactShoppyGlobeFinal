@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateItemQuantity, removeCartItem } from "../reduc/cartSlice";
+import { updateItemQuantity, removeCartItem } from "../redux/cartSlice";
 
 const CartItem = ({ cartItem }) => {
   const [quantity, setQuantity] = useState(cartItem.quantity || 1);

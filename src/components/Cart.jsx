@@ -6,7 +6,7 @@ const Cart = () => {
   const isLightTheme = useSelector(
     (store) => store.productsListSlice.isLightTheme
   );
-  console.log(isLightTheme);
+  // console.log(isLightTheme);
   const cartItems = useSelector((store) => store.cartSlice.items);
 
   return (
